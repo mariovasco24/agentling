@@ -44,14 +44,19 @@ function prune(dir, now) {
   }
 }
 
+/** Lee el JSON de stdin; si el agente no envía nada (stdin abierto pero vacío) no espera más de STDIN_TIMEOUT_MS. */
+const STDIN_TIMEOUT_MS = 1000;
+
 function readStdin() {
   if (process.stdin.isTTY) return Promise.resolve('');
   return new Promise((resolve) => {
     let data = '';
+    const done = () => { clearTimeout(timer); process.stdin.destroy(); resolve(data); };
+    const timer = setTimeout(done, STDIN_TIMEOUT_MS);
     process.stdin.setEncoding('utf8');
     process.stdin.on('data', (chunk) => { data += chunk; });
-    process.stdin.on('end', () => resolve(data));
-    process.stdin.on('error', () => resolve(data));
+    process.stdin.on('end', done);
+    process.stdin.on('error', done);
   });
 }
 
