@@ -6,6 +6,8 @@ const { pathToFileURL } = require('url');
 
 const ID = /^[a-z0-9-]+$/i;
 const DEFAULT_THEME = 'spark';
+/** Versión del contrato de temas que entiende esta app (ver THEMES.md). Un tema con una versión mayor se ignora. */
+const SUPPORTED_API = 1;
 
 /**
  * Un tema es una carpeta con theme.json, theme.html y theme.css.
@@ -22,6 +24,10 @@ function listThemes(dirs) {
         || !fs.existsSync(path.join(themeDir, 'theme.css'))) continue;
       let meta = {};
       try { meta = JSON.parse(fs.readFileSync(path.join(themeDir, 'theme.json'), 'utf8')); } catch { /* opcional */ }
+      if ((meta.apiVersion ?? 1) > SUPPORTED_API) {
+        console.warn(`agentling: theme "${id}" needs theme API ${meta.apiVersion}, this app supports ${SUPPORTED_API}`);
+        continue;
+      }
       found.set(id, { id, name: meta.name || id, dir: themeDir });
     }
   }
@@ -40,4 +46,4 @@ function loadTheme(themes, id) {
   };
 }
 
-module.exports = { listThemes, loadTheme, DEFAULT_THEME };
+module.exports = { listThemes, loadTheme, DEFAULT_THEME, SUPPORTED_API };

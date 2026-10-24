@@ -65,7 +65,7 @@ Claude Code has no “thinking” event, so *thinking* is the time between your 
 
 ## Themes
 
-Pick one from the menu. Built in: **Spark** and **Traffic light**. Themes are plain HTML + CSS folders — drop your own into the folder opened by the menu entry **Open themes folder**. See [THEMES.md](THEMES.md).
+Pick one from the menu. Built in: **Spark** and **Traffic light**. Themes are plain HTML + CSS folders rendered in an isolated Shadow DOM: scaffold one with `npm run theme:new -- my-theme` or drop yours into the folder opened by the menu entry **Open themes folder** — no app code changes needed. See [THEMES.md](THEMES.md).
 
 ## Configuration
 

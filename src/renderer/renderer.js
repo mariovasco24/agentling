@@ -6,10 +6,10 @@ const BUBBLES = { thinking: ['.', '..', '...'], attention: ['!'] };
 let state = 'idle';
 let labels = {};
 let tick = 0;
-let themeStyle = null;
 
 function renderState() {
   document.body.dataset.state = state;
+  $('character').dataset.state = state; // los temas leen el estado con :host([data-state="…"])
   $('label').textContent = labels[state] || '';
   const bubble = $('bubble');
   const frames = BUBBLES[state];
@@ -17,13 +17,16 @@ function renderState() {
   if (frames) bubble.textContent = frames[tick % frames.length];
 }
 
+/** Cada tema vive en su propio shadow root: sus estilos no pueden afectar a la app ni a otros temas. */
 function applyTheme(theme) {
   if (!theme) return;
-  themeStyle?.remove();
-  themeStyle = document.createElement('style');
-  themeStyle.textContent = theme.css;
-  document.head.appendChild(themeStyle);
-  $('character').innerHTML = theme.html;
+  const host = $('character');
+  const root = host.shadowRoot || host.attachShadow({ mode: 'open' });
+  const style = document.createElement('style');
+  style.textContent = theme.css;
+  const body = document.createElement('template');
+  body.innerHTML = theme.html;
+  root.replaceChildren(style, body.content);
 }
 
 function applyScale(scale) {

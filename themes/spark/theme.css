@@ -1,22 +1,22 @@
 /* Tema "spark": un destello naranja con cara, dibujado en SVG. Sin imágenes externas. */
-#character .spark { width: 160px; height: 160px; }
-#character .spark svg { width: 160px; height: 160px; overflow: visible; filter: drop-shadow(0 6px 8px #0005); }
-#character .spark-body, #character .spark-rays { transform-box: view-box; transform-origin: 100px 100px; }
-#character .spark-eye { transform-box: fill-box; transform-origin: center; animation: spark-blink 5s infinite; }
+.spark { width: 160px; height: 160px; }
+.spark svg { width: 160px; height: 160px; overflow: visible; filter: drop-shadow(0 6px 8px #0005); }
+.spark-body, .spark-rays { transform-box: view-box; transform-origin: 100px 100px; }
+.spark-eye { transform-box: fill-box; transform-origin: center; animation: spark-blink 5s infinite; }
 
 .spark [data-for] { display: none; }
-body[data-state="idle"] .spark [data-for="idle"],
-body[data-state="thinking"] .spark [data-for="thinking"],
-body[data-state="working"] .spark [data-for="working"],
-body[data-state="attention"] .spark [data-for="attention"] { display: inline; }
+:host([data-state="idle"]) .spark [data-for="idle"],
+:host([data-state="thinking"]) .spark [data-for="thinking"],
+:host([data-state="working"]) .spark [data-for="working"],
+:host([data-state="attention"]) .spark [data-for="attention"] { display: inline; }
 
-body[data-state="idle"] .spark-body { animation: spark-breathe 4s ease-in-out infinite; }
-body[data-state="thinking"] .spark-rays { animation: spark-spin 14s linear infinite; }
-body[data-state="thinking"] .spark-body { animation: spark-breathe 2.4s ease-in-out infinite; }
-body[data-state="working"] .spark-rays { animation: spark-spin 3.2s linear infinite; }
-body[data-state="working"] .spark-body { animation: spark-flare .8s ease-in-out infinite; }
-body[data-state="attention"] .spark-body { animation: spark-bounce .9s ease-in-out infinite; }
-body[data-state="attention"] .spark-rays { animation: spark-flare .45s ease-in-out infinite; }
+:host([data-state="idle"]) .spark-body { animation: spark-breathe 4s ease-in-out infinite; }
+:host([data-state="thinking"]) .spark-rays { animation: spark-spin 14s linear infinite; }
+:host([data-state="thinking"]) .spark-body { animation: spark-breathe 2.4s ease-in-out infinite; }
+:host([data-state="working"]) .spark-rays { animation: spark-spin 3.2s linear infinite; }
+:host([data-state="working"]) .spark-body { animation: spark-flare .8s ease-in-out infinite; }
+:host([data-state="attention"]) .spark-body { animation: spark-bounce .9s ease-in-out infinite; }
+:host([data-state="attention"]) .spark-rays { animation: spark-flare .45s ease-in-out infinite; }
 
 @keyframes spark-spin { to { transform: rotate(360deg); } }
 @keyframes spark-breathe { 50% { transform: scale(1.05); } }

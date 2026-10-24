@@ -22,7 +22,8 @@
     "connect": "node scripts/connect.js",
     "disconnect": "node scripts/connect.js --disconnect",
     "doctor": "node scripts/doctor.js",
-    "test": "node --test"
+    "test": "node --test",
+    "theme:new": "node scripts/new-theme.js"
   },
   "devDependencies": {
     "electron": "^33.0.0"
