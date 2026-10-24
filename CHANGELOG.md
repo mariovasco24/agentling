@@ -4,6 +4,17 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+### Changed
+- Electron updated from 33 to 44.
+- README rewritten as a complete user manual (English and Spanish).
+
+### Added
+- `npm run update` to pull the latest version and refresh dependencies.
+
+### Fixed
+- `ensure-electron` now repairs a broken install using the cached download for the *installed* Electron version.
+- The hook no longer waits indefinitely when its stdin is open but empty.
+
 ## [1.0.0] - 2026-10-23
 
 ### Added
