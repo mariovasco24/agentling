@@ -41,8 +41,20 @@ function createPetWindow({ position, onMoved }) {
   return win;
 }
 
+/**
+ * Cambia el tamaño manteniendo fijo el centro inferior de la mascota (crece hacia arriba y a los lados)
+ * y la mantiene dentro de la pantalla. Devuelve la posición resultante para guardarla.
+ */
 function resize(win, scale) {
-  win.setContentSize(Math.round(BASE_SIZE.width * scale), Math.round(BASE_SIZE.height * scale));
+  const width = Math.round(BASE_SIZE.width * scale);
+  const height = Math.round(BASE_SIZE.height * scale);
+  const old = win.getBounds();
+  const target = { x: old.x + Math.round((old.width - width) / 2), y: old.y + old.height - height, width, height };
+  const { workArea } = screen.getDisplayMatching(old);
+  target.x = Math.min(Math.max(target.x, workArea.x), workArea.x + workArea.width - width);
+  target.y = Math.min(Math.max(target.y, workArea.y), workArea.y + workArea.height - height);
+  win.setBounds(target);
+  return { x: target.x, y: target.y };
 }
 
 module.exports = { createPetWindow, resize };

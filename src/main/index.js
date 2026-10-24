@@ -36,7 +36,7 @@ function start() {
     position: store.get(),
     onMoved: (x, y) => store.set({ x, y }),
   });
-  resize(win, store.get().scale);
+  store.set(resize(win, store.get().scale));
 
   const tray = new Tray(trayIcon(STATES.IDLE));
   const canAutostart = process.platform === 'darwin' || process.platform === 'win32';
@@ -47,7 +47,7 @@ function start() {
     quit: () => app.quit(),
     openThemes: () => shell.openPath(userThemes),
     connect: (agent) => { agent.connect(); refreshMenu(); },
-    setScale: (scale) => { store.set({ scale }); resize(win, scale); win.webContents.send('scale', scale); refreshMenu(); },
+    setScale: (scale) => { store.set({ scale, ...resize(win, scale) }); win.webContents.send('scale', scale); refreshMenu(); },
     setSound: (sound) => { store.set({ sound }); },
     setTheme: (id) => { store.set({ theme: id }); win.webContents.send('theme', loadTheme(themes(), id)); refreshMenu(); },
     setAutostart: (openAtLogin) => app.setLoginItemSettings({ openAtLogin, ...loginArgs }),
