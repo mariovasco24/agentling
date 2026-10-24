@@ -26,7 +26,7 @@
     "theme:new": "node scripts/new-theme.js"
   },
   "devDependencies": {
-    "electron": "^33.0.0"
+    "electron": "^44.9.2"
   },
   "bin": {
     "agentling-hook": "bin/agentling-hook.js"
