@@ -1,0 +1,35 @@
+/* Interfaz común a todos los temas. Los temas solo dibujan el personaje dentro de #character. */
+:root { --size-w: 200px; --size-h: 230px; }
+
+body[data-state="idle"]      { --state-color: #34c759; }
+body[data-state="thinking"]  { --state-color: #ffcc00; }
+body[data-state="working"]   { --state-color: #0a84ff; }
+body[data-state="attention"] { --state-color: #ff3b30; }
+
+html, body { margin: 0; background: transparent; overflow: hidden; user-select: none;
+  font-family: -apple-system, system-ui, "Segoe UI", sans-serif; }
+
+#root { width: var(--size-w); height: var(--size-h); position: relative;
+  transform-origin: top left; -webkit-app-region: drag; }
+
+#glow { position: absolute; left: 30px; top: 60px; width: 140px; height: 130px; border-radius: 50%;
+  background: var(--state-color); filter: blur(26px); opacity: .5; transition: background .4s; }
+
+#character { position: absolute; left: 20px; top: 40px; width: 160px; height: 160px; }
+
+#bubble { position: absolute; left: 50%; top: 4px; transform: translateX(-50%); z-index: 2;
+  min-width: 44px; padding: 5px 14px; border-radius: 16px; background: #fff; color: #222;
+  font-weight: 800; font-size: 17px; text-align: center; box-shadow: 0 3px 8px #0004; }
+#bubble[hidden] { display: none; }
+#bubble::after { content: ""; position: absolute; left: 50%; bottom: -6px; margin-left: -6px;
+  border: 6px solid transparent; border-bottom: 0; border-top-color: #fff; }
+body[data-state="attention"] #bubble { color: var(--state-color); }
+
+#pill { position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); display: flex;
+  align-items: center; gap: 7px; padding: 4px 12px 4px 9px; border-radius: 14px; background: #000a;
+  color: #fff; font-size: 12px; font-weight: 600; white-space: nowrap; backdrop-filter: blur(6px); }
+#dot { width: 11px; height: 11px; border-radius: 50%; background: var(--state-color);
+  box-shadow: 0 0 8px var(--state-color); transition: background .3s; }
+body:not([data-state="idle"]) #dot { animation: pulse 1s infinite; }
+
+@keyframes pulse { 50% { opacity: .45; } }
