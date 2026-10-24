@@ -88,7 +88,7 @@ Agentling has **no runtime dependencies** beyond [Electron](https://www.electron
 
 | | Status |
 |---|---|
-| **Latest version** | **1.0.0** — see [Releases](https://github.com/mariovasco24/agentling/releases) and the [CHANGELOG](CHANGELOG.md) |
+| **Latest version** | **1.0.1** — see [Releases](https://github.com/mariovasco24/agentling/releases) and the [CHANGELOG](CHANGELOG.md) |
 | **macOS** (Apple Silicon) | ✅ Tested end to end (macOS 26, Electron 44) |
 | **macOS** (Intel) | 🟡 Supported by Electron; not tested by the maintainer |
 | **Windows 10/11** | 🟡 Unit tests run in CI; the desktop app itself hasn't been verified yet — reports welcome |
@@ -374,6 +374,6 @@ npm start
 
 ## 🏷️ Versioning and license
 
-Agentling follows [Semantic Versioning](https://semver.org/). The current version is **1.0.0**; changes are listed in the [CHANGELOG](CHANGELOG.md).
+Agentling follows [Semantic Versioning](https://semver.org/). The current version is **1.0.1**; changes are listed in the [CHANGELOG](CHANGELOG.md).
 
 Released under the [MIT License](LICENSE).

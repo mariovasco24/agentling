@@ -4,6 +4,8 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-23
+
 ### Changed
 - Electron updated from 33 to 44.
 - README rewritten as a complete user manual (English and Spanish).
@@ -25,4 +27,6 @@ All notable changes are documented here. The format follows [Keep a Changelog](h
 - `npm run setup`, `connect`, `disconnect` and `doctor` for easy install and troubleshooting.
 - Unit tests and CI on Linux, macOS and Windows.
 
+[Unreleased]: https://github.com/mariovasco24/agentling/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/mariovasco24/agentling/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/mariovasco24/agentling/releases/tag/v1.0.0

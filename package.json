@@ -1,6 +1,6 @@
 {
   "name": "agentling",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A desktop pet that shows what your AI coding agent is doing: idle, thinking, working or waiting for you.",
   "license": "MIT",
   "main": "src/main/index.js",
