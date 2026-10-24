@@ -23,7 +23,8 @@
     "disconnect": "node scripts/connect.js --disconnect",
     "doctor": "node scripts/doctor.js",
     "test": "node --test",
-    "theme:new": "node scripts/new-theme.js"
+    "theme:new": "node scripts/new-theme.js",
+    "update": "git pull --ff-only && npm install && node scripts/ensure-electron.js"
   },
   "devDependencies": {
     "electron": "^44.9.2"

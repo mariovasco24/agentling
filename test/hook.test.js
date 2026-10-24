@@ -78,3 +78,16 @@ test('con stdin inválido no falla', () => {
   });
   assert.equal(result.status, 0);
 });
+
+test('si stdin queda abierto y vacío, termina igualmente (no cuelga al agente)', () => {
+  const dir = tmp();
+  const started = Date.now();
+  const result = spawnSync(process.execPath, [HOOK, 'generic', 'working'], {
+    stdio: ['pipe', 'pipe', 'pipe'], // stdin abierto sin escribir ni cerrar
+    env: { ...process.env, AGENTLING_STATE_DIR: dir },
+    timeout: 5000,
+  });
+  assert.equal(result.status, 0);
+  assert.ok(Date.now() - started < 4000);
+  assert.equal(fs.readFileSync(path.join(dir, 'generic__default'), 'utf8'), 'working');
+});

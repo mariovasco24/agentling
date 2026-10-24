@@ -23,7 +23,10 @@ function healthy() {
   return process.platform !== 'darwin' || fs.existsSync(path.join(dist, 'Electron.app', 'Contents', 'Frameworks'));
 }
 
+/** Busca en la caché de descargas de Electron el zip de LA versión instalada (no uno cualquiera). */
 function cachedZip() {
+  const { version } = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'));
+  const name = `electron-v${version}-${process.platform}-${process.arch}.zip`;
   const roots = [
     path.join(os.homedir(), 'Library', 'Caches', 'electron'),
     path.join(process.env.XDG_CACHE_HOME || path.join(os.homedir(), '.cache'), 'electron'),
@@ -31,11 +34,9 @@ function cachedZip() {
   ];
   for (const root of roots) {
     if (!fs.existsSync(root)) continue;
-    for (const sub of fs.readdirSync(root)) {
-      const found = [path.join(root, sub), root]
-        .filter((d) => fs.existsSync(d) && fs.statSync(d).isDirectory())
-        .flatMap((d) => fs.readdirSync(d).filter((f) => /^electron-v.*\.zip$/.test(f)).map((f) => path.join(d, f)));
-      if (found.length) return found[0];
+    for (const candidate of [root, ...fs.readdirSync(root).map((sub) => path.join(root, sub))]) {
+      const file = path.join(candidate, name);
+      if (fs.existsSync(file)) return file;
     }
   }
   return null;
