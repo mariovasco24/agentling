@@ -1,0 +1,32 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+  - type: input
+    id: os
+    attributes:
+      label: OS and version
+      placeholder: macOS 15, Windows 11, Ubuntu 24.04…
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Agentling / Node / agent versions
+      placeholder: "1.0.0 / Node 22 / Claude Code 2.x"
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `npm run doctor`
+      render: text
