@@ -27,7 +27,7 @@
     "update": "git pull --ff-only && npm install && node scripts/ensure-electron.js"
   },
   "devDependencies": {
-    "electron": "^44.9.2"
+    "electron": "^45.1.0"
   },
   "bin": {
     "agentling-hook": "bin/agentling-hook.js"
